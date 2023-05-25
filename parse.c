@@ -36,10 +36,14 @@ void processLine(char *line, stack_t **ptr, int line_num, int *err_flag)
 				}
 				push(ptr, number);
 			}
-		}
-		if (strcmp(token, "pall") == 0)
+		} else if (strcmp(token, "pall") == 0)
 		{
 			pall(ptr);
+		} else
+		{
+			fprintf(stderr, "L%d: unknown instruction %s\n", line_num, token);
+			*err_flag = 1;
+			return;
 		}
 
 		token = strtok(NULL, delimiter);
