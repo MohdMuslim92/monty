@@ -25,13 +25,7 @@ int main(int argc, char *argv[])
 	file = fopen(argv[1], "r");
 	if (file == NULL)
 	{
-		printf("Error opening the file.\n");
-		exit(EXIT_FAILURE);
-	}
-	if (access(argv[1], R_OK) == -1)
-	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-		fclose(file);
 		exit(EXIT_FAILURE);
 	}
 
