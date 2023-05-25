@@ -31,6 +31,12 @@ int main(int argc, char *argv[])
 
 	while (fgets(line, sizeof(line), file) != NULL)
 	{
+		if (empty_or_comment(line))
+		{
+			line_num++;
+			continue;
+		}
+
 		processLine(line, &ptr, line_num, &err_flag);
 		line_num++;
 		if (err_flag)
@@ -47,3 +53,25 @@ int main(int argc, char *argv[])
 	return (0);
 }
 
+/**
+ * empty_or_comment - Check if a line is empty or a comment
+ * @line: line to check
+ * Return: 1 if line is empty or a comment, 0 otherwise
+*/
+int empty_or_comment(const char *line)
+{
+	size_t i;
+	size_t len = strlen(line);
+
+	if (len > 0 && line[len - 1] == '\n')
+	{
+		len--;
+	}
+
+	for (i = 0; i < len; i++)
+	{
+		if (!isspace(line[i]) && line[0] != '#')
+			return (0);
+	}
+	return (1);
+}
