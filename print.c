@@ -10,6 +10,10 @@ void pall(stack_t **topptr)
 	stack_t *temp;
 
 	temp = *topptr;
+	if (temp == NULL)
+	{
+		return;
+	}
 
 	while (temp)
 	{
