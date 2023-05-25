@@ -35,6 +35,11 @@ void processLine(char *line, stack_t **ptr, int line_num, int *err_flag)
 					return;
 				}
 				push(ptr, number);
+			} else
+			{
+				fprintf(stderr, "L%d: usage: push integer\n", line_num);
+				*err_flag = 1;
+				return;
 			}
 		} else if (strcmp(token, "pall") == 0)
 		{
