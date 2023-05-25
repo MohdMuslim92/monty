@@ -37,4 +37,5 @@ void push(stack_t **topptr, int data);
 void pall(stack_t **topptr);
 void processLine(char *line, stack_t **ptr, int line_num, int *err_flag);
 void free_stack(stack_t **topptr);
+int empty_or_comment(const char *line);
 #endif
