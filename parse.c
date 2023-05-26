@@ -25,6 +25,7 @@ void processLine(char *line, stack_t **ptr, int line_num, int *err_flag)
 		{
 			token = strtok(NULL, delimiter);
 			handlePush(token, ptr, line_num, err_flag);
+			return;
 		}
 		else if (strcmp(token, "pall") == 0)
 		{
@@ -33,9 +34,11 @@ void processLine(char *line, stack_t **ptr, int line_num, int *err_flag)
 		else if (strcmp(token, "pint") == 0)
 		{
 			handlePint(ptr, line_num, err_flag);
+			return;
 		} else if (strcmp(token, "pop") == 0)
 		{
 			handlePop(ptr, line_num, err_flag);
+			return;
 		} else
 		{
 			handleUnknownInstruction(token, line_num, err_flag);
