@@ -43,10 +43,12 @@ int empty_or_comment(const char *line);
 void processLine(char *line, stack_t **ptr, int line_num, int *err_flag);
 void pop(stack_t **topptr, int *err_flag);
 void swap(stack_t **topptr, int *err_flag);
+void add(stack_t **topptr, int *err_flag);
 void handlePush(char *token, stack_t **ptr, int line_num, int *err_flag);
 void handlePall(stack_t **ptr);
 void handlePint(stack_t **ptr, int line_num, int *err_flag);
 void handlePop(stack_t **ptr, int line_num, int *err_flag);
 void handleSwap(stack_t **ptr, int line_num, int *err_flag);
+void handleAdd(stack_t **ptr, int line_num, int *err_flag);
 void handleUnknownInstruction(char *token, int line_num, int *err_flag);
 #endif
