@@ -15,9 +15,8 @@
 */
 void processLine(char *line, stack_t **ptr, int line_num, int *err_flag)
 {
-	char *token, *strptr;
+	char *token;
 	const char *delimiter = " \t\n";
-	long int number;
 
 	token = strtok(line, delimiter);
 	while (token != NULL)
@@ -25,32 +24,102 @@ void processLine(char *line, stack_t **ptr, int line_num, int *err_flag)
 		if (strcmp(token, "push") == 0)
 		{
 			token = strtok(NULL, delimiter);
-			if (token != NULL)
-			{
-				number = strtol(token, &strptr, 10);
-				if (strptr == token)
-				{
-					fprintf(stderr, "L%d: usage: push integer\n", line_num);
-					*err_flag = 1;
-					return;
-				}
-				push(ptr, number);
-			} else
-			{
-				fprintf(stderr, "L%d: usage: push integer\n", line_num);
-				*err_flag = 1;
-				return;
-			}
-		} else if (strcmp(token, "pall") == 0)
+			handlePush(token, ptr, line_num, err_flag);
+		}
+		else if (strcmp(token, "pall") == 0)
 		{
-			pall(ptr);
-		} else
+			handlePall(ptr);
+		}
+		else if (strcmp(token, "pint") == 0)
 		{
-			fprintf(stderr, "L%d: unknown instruction %s\n", line_num, token);
-			*err_flag = 1;
-			return;
+			handlePint(ptr, line_num, err_flag);
+		}
+		else
+		{
+			handleUnknownInstruction(token, line_num, err_flag);
 		}
 
 		token = strtok(NULL, delimiter);
 	}
+}
+
+/**
+ * handlePush - helper function
+ * Description: a function that tokenize the line and then call
+ *				the function push and pass the number to it
+ *				to push an element to the stack
+ *@token: pointer to token to be tokenize
+ * @ptr: pointer to the top of the stack
+ * @line_num: the line number which used when printing an error if happened
+ * @err_flag: an error flag that it's value 0 and will be
+ *				updatecld if an error happened
+*/
+void handlePush(char *token, stack_t **ptr, int line_num, int *err_flag)
+{
+	char *strptr;
+	long int number;
+
+	if (token != NULL)
+	{
+		number = strtol(token, &strptr, 10);
+		if (strptr == token)
+		{
+			fprintf(stderr, "L%d: usage: push integer\n", line_num);
+			*err_flag = 1;
+			return;
+		}
+		push(ptr, number);
+	}
+	else
+	{
+		fprintf(stderr, "L%d: usage: push integer\n", line_num);
+		*err_flag = 1;
+		return;
+	}
+}
+
+/**
+ * handlePall - helper function
+ * Description: a function that calls printing function to
+ *				print stack elements
+ * @ptr: pointer to the top of the stack
+ *				updatecld if an error happened
+*/
+void handlePall(stack_t **ptr)
+{
+	pall(ptr);
+}
+
+/**
+ * handlePint - helper function
+ * Description: a function that calls another function to
+ *				print the top element in the linked list
+ * @ptr: pointer to the top of the stack
+ * @line_num: the line number which used when printing an error if happened
+ * @err_flag: an error flag that it's value 0 and will be
+ *				updatecld if an error happened
+*/
+void handlePint(stack_t **ptr, int line_num, int *err_flag)
+{
+	pint(ptr, err_flag);
+	if (*err_flag == 1)
+	{
+		fprintf(stderr, "L%d: can't pint, stack empty\n", line_num);
+		return;
+	}
+}
+
+/**
+ * handleUnknownInstruction - helper function
+ * Description: a function that print an error to the standard
+ *				error outbot when the instruction is not valid
+ *@token: pointer to token to be tokenize
+ * @line_num: the line number which used when printing an error if happened
+ * @err_flag: an error flag that it's value 0 and will be
+ *				updatecld if an error happened
+*/
+void handleUnknownInstruction(char *token, int line_num, int *err_flag)
+{
+	fprintf(stderr, "L%d: unknown instruction %s\n", line_num, token);
+	*err_flag = 1;
 }
