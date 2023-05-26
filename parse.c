@@ -39,6 +39,10 @@ void processLine(char *line, stack_t **ptr, int line_num, int *err_flag)
 		{
 			handleSwap(ptr, line_num, err_flag);
 			return;
+		} else if (strcmp(token, "add") == 0)
+		{
+			handleAdd(ptr, line_num, err_flag);
+			return;
 		} else if (strcmp(token, "pall") == 0)
 		{
 			handlePall(ptr);
