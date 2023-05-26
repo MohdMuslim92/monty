@@ -11,6 +11,10 @@ void pall(stack_t **topptr)
 
 	temp = *topptr;
 
+	if (temp == NULL)
+	{
+		return;
+	}
 	while (temp)
 	{
 		printf("%d\n", temp->n);
