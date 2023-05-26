@@ -27,10 +27,6 @@ void processLine(char *line, stack_t **ptr, int line_num, int *err_flag)
 			handlePush(token, ptr, line_num, err_flag);
 			return;
 		}
-		else if (strcmp(token, "pall") == 0)
-		{
-			handlePall(ptr);
-		}
 		else if (strcmp(token, "pint") == 0)
 		{
 			handlePint(ptr, line_num, err_flag);
@@ -39,6 +35,13 @@ void processLine(char *line, stack_t **ptr, int line_num, int *err_flag)
 		{
 			handlePop(ptr, line_num, err_flag);
 			return;
+		} else if (strcmp(token, "swap") == 0)
+		{
+			handleSwap(ptr, line_num, err_flag);
+			return;
+		} else if (strcmp(token, "pall") == 0)
+		{
+			handlePall(ptr);
 		} else
 		{
 			handleUnknownInstruction(token, line_num, err_flag);
