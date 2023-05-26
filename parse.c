@@ -43,6 +43,9 @@ void processLine(char *line, stack_t **ptr, int line_num, int *err_flag)
 		{
 			handleAdd(ptr, line_num, err_flag);
 			return;
+		} else if (strcmp(token, "nop") == 0)
+		{
+			nop();
 		} else if (strcmp(token, "pall") == 0)
 		{
 			handlePall(ptr);
@@ -50,7 +53,6 @@ void processLine(char *line, stack_t **ptr, int line_num, int *err_flag)
 		{
 			handleUnknownInstruction(token, line_num, err_flag);
 		}
-
 		token = strtok(NULL, delimiter);
 	}
 }
