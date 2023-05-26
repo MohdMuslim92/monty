@@ -33,8 +33,10 @@ void processLine(char *line, stack_t **ptr, int line_num, int *err_flag)
 		else if (strcmp(token, "pint") == 0)
 		{
 			handlePint(ptr, line_num, err_flag);
-		}
-		else
+		} else if (strcmp(token, "pop") == 0)
+		{
+			handlePop(ptr, line_num, err_flag);
+		} else
 		{
 			handleUnknownInstruction(token, line_num, err_flag);
 		}
@@ -93,7 +95,7 @@ void handlePall(stack_t **ptr)
 /**
  * handlePint - helper function
  * Description: a function that calls another function to
- *				print the top element in the linked list
+ *				print the top element in the stack
  * @ptr: pointer to the top of the stack
  * @line_num: the line number which used when printing an error if happened
  * @err_flag: an error flag that it's value 0 and will be
@@ -110,16 +112,20 @@ void handlePint(stack_t **ptr, int line_num, int *err_flag)
 }
 
 /**
- * handleUnknownInstruction - helper function
- * Description: a function that print an error to the standard
- *				error outbot when the instruction is not valid
- *@token: pointer to token to be tokenize
+ * handlePop - helper function
+ * Description: a function that calls another function to
+ *				remove the top element in the stack
+ * @ptr: pointer to the top of the stack
  * @line_num: the line number which used when printing an error if happened
  * @err_flag: an error flag that it's value 0 and will be
  *				updatecld if an error happened
 */
-void handleUnknownInstruction(char *token, int line_num, int *err_flag)
+void handlePop(stack_t **ptr, int line_num, int *err_flag)
 {
-	fprintf(stderr, "L%d: unknown instruction %s\n", line_num, token);
-	*err_flag = 1;
+	pop(ptr, err_flag);
+	if (*err_flag == 1)
+	{
+		fprintf(stderr, "L%d: can't pop an empty stack\n", line_num);
+		return;
+	}
 }
