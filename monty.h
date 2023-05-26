@@ -44,6 +44,7 @@ void processLine(char *line, stack_t **ptr, int line_num, int *err_flag);
 void pop(stack_t **topptr, int *err_flag);
 void swap(stack_t **topptr, int *err_flag);
 void add(stack_t **topptr, int *err_flag);
+void nop(void);
 void handlePush(char *token, stack_t **ptr, int line_num, int *err_flag);
 void handlePall(stack_t **ptr);
 void handlePint(stack_t **ptr, int line_num, int *err_flag);
