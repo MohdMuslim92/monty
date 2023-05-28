@@ -59,6 +59,14 @@ void processLine(char *line, stack_t **ptr, int line_num, int *err_flag)
 		{
 			handleMod(ptr, line_num, err_flag);
 			return;
+		} else if (strcmp(token, "pchar") == 0)
+		{
+			handlePchar(ptr, line_num, err_flag);
+			return;
+		} else if (strcmp(token, "pstr") == 0)
+		{
+			handlePstr(ptr);
+			return;
 		} else if (strcmp(token, "nop") == 0)
 		{
 			nop();
