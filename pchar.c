@@ -10,7 +10,6 @@
 
 void pchar(stack_t **topptr, int *err_flag)
 {
-	stack_t *temp;
 	int num;
 	char letter;
 
