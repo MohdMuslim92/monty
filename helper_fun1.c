@@ -17,6 +17,12 @@ void handleDiv(stack_t **ptr, int line_num, int *err_flag)
 		fprintf(stderr, "L%d: can't div, stack too short\n", line_num);
 		return;
 	}
+	if (*err_flag == 2)
+	{
+		fprintf(stderr, "L%d: division by zero\n", line_num);
+		*err_flag = 1;
+		return;
+	}
 }
 
 
