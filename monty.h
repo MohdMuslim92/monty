@@ -44,6 +44,8 @@ void free_stack(stack_t **topptr);
 int empty_or_comment(const char *line);
 void swap(stack_t **topptr, int *err_flag);
 void nop(void);
+void pchar(stack_t **topptr, int *err_flag);
+void pstr(stack_t **topptr);
 
 void add(stack_t **topptr, int *err_flag);
 void sub(stack_t **topptr, int *err_flag);
@@ -61,5 +63,7 @@ void handleSub(stack_t **ptr, int line_num, int *err_flag);
 void handleMul(stack_t **ptr, int line_num, int *err_flag);
 void handleDiv(stack_t **ptr, int line_num, int *err_flag);
 void handleMod(stack_t **ptr, int line_num, int *err_flag);
+void handlePchar(stack_t **ptr, int line_num, int *err_flag);
+void handlePstr(stack_t **ptr);
 void handleUnknownInstruction(char *token, int line_num, int *err_flag);
 #endif
