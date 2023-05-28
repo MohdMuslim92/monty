@@ -34,22 +34,32 @@ typedef struct instruction_s
 	char *opcode;
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+void processLine(char *line, stack_t **ptr, int line_num, int *err_flag);
+
 void push(stack_t **topptr, int data);
 void pall(stack_t **topptr);
 void pint(stack_t **topptr, int *err_flag);
-void processLine(char *line, stack_t **ptr, int line_num, int *err_flag);
+void pop(stack_t **topptr, int *err_flag);
 void free_stack(stack_t **topptr);
 int empty_or_comment(const char *line);
-void processLine(char *line, stack_t **ptr, int line_num, int *err_flag);
-void pop(stack_t **topptr, int *err_flag);
 void swap(stack_t **topptr, int *err_flag);
-void add(stack_t **topptr, int *err_flag);
 void nop(void);
+
+void add(stack_t **topptr, int *err_flag);
+void sub(stack_t **topptr, int *err_flag);
+void division(stack_t **topptr, int *err_flag);
+void mul(stack_t **topptr, int *err_flag);
+void mod(stack_t **topptr, int *err_flag);
+
 void handlePush(char *token, stack_t **ptr, int line_num, int *err_flag);
 void handlePall(stack_t **ptr);
 void handlePint(stack_t **ptr, int line_num, int *err_flag);
 void handlePop(stack_t **ptr, int line_num, int *err_flag);
 void handleSwap(stack_t **ptr, int line_num, int *err_flag);
 void handleAdd(stack_t **ptr, int line_num, int *err_flag);
+void handleSub(stack_t **ptr, int line_num, int *err_flag);
+void handleMul(stack_t **ptr, int line_num, int *err_flag);
+void handleDiv(stack_t **ptr, int line_num, int *err_flag);
+void handleMod(stack_t **ptr, int line_num, int *err_flag);
 void handleUnknownInstruction(char *token, int line_num, int *err_flag);
 #endif
