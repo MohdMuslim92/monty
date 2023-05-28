@@ -36,6 +36,46 @@ void handleAdd(stack_t **ptr, int line_num, int *err_flag)
 		return;
 	}
 }
+
+/**
+ * handleSub - helper function
+ * Description: a function that calls another function to
+ *				subtract the value of the top two elements in the stack
+ * @ptr: pointer to the top of the stack
+ * @line_num: the line number which used when printing an error if happened
+ * @err_flag: an error flag that it's value 0 and will be
+ *				updatecld if an error happened
+*/
+void handleSub(stack_t **ptr, int line_num, int *err_flag)
+{
+	sub(ptr, err_flag);
+	if (*err_flag == 1)
+	{
+		fprintf(stderr, "L%d: can't sub, stack too short\n", line_num);
+		return;
+	}
+}
+
+
+/**
+ * handleMul - helper function
+ * Description: a function that calls another function to
+ *				multiply the value of the top two elements in the stack
+ * @ptr: pointer to the top of the stack
+ * @line_num: the line number which used when printing an error if happened
+ * @err_flag: an error flag that it's value 0 and will be
+ *				updatecld if an error happened
+*/
+void handleMul(stack_t **ptr, int line_num, int *err_flag)
+{
+	mul(ptr, err_flag);
+	if (*err_flag == 1)
+	{
+		fprintf(stderr, "L%d: can't mul, stack too short", line_num);
+		return;
+	}
+}
+
 /**
  * handleUnknownInstruction - helper function
  * Description: a function that print an error to the standard
