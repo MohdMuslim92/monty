@@ -41,7 +41,7 @@ void handleMod(stack_t **ptr, int line_num, int *err_flag)
 	mod(ptr, err_flag);
 	if (*err_flag == 1)
 	{
-		fprintf(stderr, "L%d: division by zero\n", line_num);
+		fprintf(stderr, "L%d: can't mod, stack too short\n", line_num);
 		return;
 	}
 	if (*err_flag == 2)
