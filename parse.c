@@ -43,6 +43,22 @@ void processLine(char *line, stack_t **ptr, int line_num, int *err_flag)
 		{
 			handleAdd(ptr, line_num, err_flag);
 			return;
+		} else if (strcmp(token, "sub") == 0)
+		{
+			handleSub(ptr, line_num, err_flag);
+			return;
+		} else if (strcmp(token, "div") == 0)
+		{
+			handleDiv(ptr, line_num, err_flag);
+			return;
+		} else if (strcmp(token, "mul") == 0)
+		{
+			handleMul(ptr, line_num, err_flag);
+			return;
+		} else if (strcmp(token, "mod") == 0)
+		{
+			handleMod(ptr, line_num, err_flag);
+			return;
 		} else if (strcmp(token, "nop") == 0)
 		{
 			nop();
@@ -92,46 +108,6 @@ void handlePush(char *token, stack_t **ptr, int line_num, int *err_flag)
 	}
 }
 
-/**
- * handlePall - helper function
- * Description: a function that calls printing function to
- *				print stack elements
- * @ptr: pointer to the top of the stack
- *				updatecld if an error happened
-*/
-void handlePall(stack_t **ptr)
-{
-	pall(ptr);
-}
-
-/**
- * handlePint - helper function
- * Description: a function that calls another function to
- *				print the top element in the stack
- * @ptr: pointer to the top of the stack
- * @line_num: the line number which used when printing an error if happened
- * @err_flag: an error flag that it's value 0 and will be
- *				updatecld if an error happened
-*/
-void handlePint(stack_t **ptr, int line_num, int *err_flag)
-{
-	pint(ptr, err_flag);
-	if (*err_flag == 1)
-	{
-		fprintf(stderr, "L%d: can't pint, stack empty\n", line_num);
-		return;
-	}
-}
-
-/**
- * handlePop - helper function
- * Description: a function that calls another function to
- *				remove the top element in the stack
- * @ptr: pointer to the top of the stack
- * @line_num: the line number which used when printing an error if happened
- * @err_flag: an error flag that it's value 0 and will be
- *				updatecld if an error happened
-*/
 void handlePop(stack_t **ptr, int line_num, int *err_flag)
 {
 	pop(ptr, err_flag);
