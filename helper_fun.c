@@ -71,7 +71,7 @@ void handleMul(stack_t **ptr, int line_num, int *err_flag)
 	mul(ptr, err_flag);
 	if (*err_flag == 1)
 	{
-		fprintf(stderr, "L%d: can't mul, stack too short", line_num);
+		fprintf(stderr, "L%d: can't mul, stack too short\n", line_num);
 		return;
 	}
 }
