@@ -108,12 +108,3 @@ void handlePush(char *token, stack_t **ptr, int line_num, int *err_flag)
 	}
 }
 
-void handlePop(stack_t **ptr, int line_num, int *err_flag)
-{
-	pop(ptr, err_flag);
-	if (*err_flag == 1)
-	{
-		fprintf(stderr, "L%d: can't pop an empty stack\n", line_num);
-		return;
-	}
-}
