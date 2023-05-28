@@ -20,6 +20,11 @@ void division(stack_t **topptr, int *err_flag)
 	}
 	num1 = (*topptr)->n;
 	num2 = (*topptr)->prev->n;
+	if (num1 == 0)
+	{
+		*err_flag = 2;
+		return;
+	}
 	result = num2 / num1;
 	(*topptr)->prev->n = result;
 
